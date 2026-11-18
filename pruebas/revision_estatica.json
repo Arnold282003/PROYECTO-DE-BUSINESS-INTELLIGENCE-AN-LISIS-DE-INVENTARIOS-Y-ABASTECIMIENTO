@@ -1,0 +1,14 @@
+{
+  "estado": "PASS",
+  "regeneracion_csv_identica": true,
+  "sha256_csv": {
+    "movimientos.csv": "22bb65b2ba87a28a89a1eb63cf4bd5490f2e11d7180b830b1fb92fcd354da547",
+    "categorias.csv": "8191f188bd554f2bdebd47c393b9011697b8ddadc222fd79475fa0b1377ab74a",
+    "productos.csv": "a7fe74ba837efbc3401276c634563331393d83dc833f98e30728a8d47aac5ab4",
+    "proveedores.csv": "535cb14af1fa80ba0cd894665cb5316d060c76e64c8c9b7f0ca41ce237b2906c",
+    "calendario.csv": "3696a42cb5fd176916867304460ca54b8446d1b49096916732be9da5ab51c6d8"
+  },
+  "referencias_visuales_validas": 22,
+  "relaciones_validas": 3,
+  "diagrama_svg_xml_valido": true
+}

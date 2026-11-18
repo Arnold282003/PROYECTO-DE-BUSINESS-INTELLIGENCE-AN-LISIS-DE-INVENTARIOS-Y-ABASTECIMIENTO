@@ -1,0 +1,26 @@
+table Proveedores
+	lineageTag: 99be904d-ae9d-4476-96ee-650d2ea3a9fa
+
+	column proveedor_id
+		dataType: int64
+		isHidden
+		lineageTag: dc8f854a-e836-441f-8ddc-f28b494549a1
+		summarizeBy: none
+		sourceColumn: proveedor_id
+
+	column proveedor
+		dataType: string
+		lineageTag: 941bb0c2-b953-45b5-a2f6-e617a111a8e5
+		summarizeBy: none
+		sourceColumn: proveedor
+
+	column ciudad
+		dataType: string
+		lineageTag: c0d0d67b-d0fe-47f5-a5d7-4de1bc0a2ca4
+		summarizeBy: none
+		sourceColumn: ciudad
+
+	partition Proveedores = m
+		mode: import
+		source = fxCSV("proveedores",{{"proveedor_id",Int64.Type},{"proveedor",type text},{"ciudad",type text}})
+

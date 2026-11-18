@@ -1,0 +1,27 @@
+{
+  "name": "Inventario · Lima",
+  "dataColors": [
+    "#147D92",
+    "#EF9D39",
+    "#4673C8",
+    "#2E9675",
+    "#985B9E"
+  ],
+  "background": "#F2F5FA",
+  "foreground": "#142D4E",
+  "tableAccent": "#147D92",
+  "textClasses": {
+    "title": {
+      "fontFace": "Segoe UI",
+      "fontSize": 12
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 10
+    },
+    "callout": {
+      "fontFace": "Segoe UI",
+      "fontSize": 28
+    }
+  }
+}

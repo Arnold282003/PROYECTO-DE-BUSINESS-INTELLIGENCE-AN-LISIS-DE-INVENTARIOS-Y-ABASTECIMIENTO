@@ -1,0 +1,22 @@
+// Bloque 1: ejecutar solo este EVALUATE para indicadores del año completo.
+EVALUATE
+ROW("Entradas", [Total entradas], "Salidas", [Total salidas],
+    "Stock", [Stock actual], "Valor", [Valor inventario],
+    "Activos", [Productos activos], "Bajo", [Productos stock bajo],
+    "Porcentaje bajo", [Porcentaje stock bajo], "Rotacion", [Rotacion inventario])
+
+// Bloque 2: ejecutar por separado; comparar filas Todos de resultados_esperados.csv.
+EVALUATE
+SUMMARIZECOLUMNS(Calendario[anio_mes],
+    "Entradas", [Total entradas], "Salidas", [Total salidas],
+    "Stock", [Stock actual], "Valor", [Valor inventario],
+    "Bajo", [Productos stock bajo], "Promedio", [Inventario promedio],
+    "Rotacion", [Rotacion inventario])
+ORDER BY Calendario[anio_mes]
+
+// Bloque 3: ejecutar por separado, contrastar con categoria 1.
+EVALUATE
+SUMMARIZECOLUMNS(Calendario[anio_mes], TREATAS({1}, Productos[categoria_id]),
+    "Entradas", [Total entradas], "Salidas", [Total salidas], "Stock", [Stock actual],
+    "Valor", [Valor inventario], "Bajo", [Productos stock bajo], "Rotacion", [Rotacion inventario])
+ORDER BY Calendario[anio_mes]

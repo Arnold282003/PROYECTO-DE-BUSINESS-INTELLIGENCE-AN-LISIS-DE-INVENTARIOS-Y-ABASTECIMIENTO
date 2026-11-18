@@ -1,0 +1,604 @@
+[
+  {
+    "pagina": "Resumen",
+    "visual": "Categoria",
+    "tipo": "slicer",
+    "titulo": "Categoría",
+    "x": 24,
+    "y": 20,
+    "ancho": 400,
+    "alto": 80,
+    "campos": {
+      "Values": [
+        [
+          "Productos",
+          "categoria",
+          false
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": null
+  },
+  {
+    "pagina": "Resumen",
+    "visual": "Proveedor",
+    "tipo": "slicer",
+    "titulo": "Proveedor principal",
+    "x": 440,
+    "y": 20,
+    "ancho": 480,
+    "alto": 80,
+    "campos": {
+      "Values": [
+        [
+          "Proveedores",
+          "proveedor",
+          false
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": null
+  },
+  {
+    "pagina": "Resumen",
+    "visual": "Fecha",
+    "tipo": "slicer",
+    "titulo": "Periodo / fecha de corte",
+    "x": 936,
+    "y": 20,
+    "ancho": 480,
+    "alto": 80,
+    "campos": {
+      "Values": [
+        [
+          "Calendario",
+          "fecha",
+          false
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": null
+  },
+  {
+    "pagina": "Abastecimiento",
+    "visual": "Categoria",
+    "tipo": "slicer",
+    "titulo": "Categoría",
+    "x": 24,
+    "y": 20,
+    "ancho": 400,
+    "alto": 80,
+    "campos": {
+      "Values": [
+        [
+          "Productos",
+          "categoria",
+          false
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": null
+  },
+  {
+    "pagina": "Abastecimiento",
+    "visual": "Proveedor",
+    "tipo": "slicer",
+    "titulo": "Proveedor principal",
+    "x": 440,
+    "y": 20,
+    "ancho": 480,
+    "alto": 80,
+    "campos": {
+      "Values": [
+        [
+          "Proveedores",
+          "proveedor",
+          false
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": null
+  },
+  {
+    "pagina": "Abastecimiento",
+    "visual": "Fecha",
+    "tipo": "slicer",
+    "titulo": "Periodo / fecha de corte",
+    "x": 936,
+    "y": 20,
+    "ancho": 480,
+    "alto": 80,
+    "campos": {
+      "Values": [
+        [
+          "Calendario",
+          "fecha",
+          false
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": null
+  },
+  {
+    "pagina": "Resumen",
+    "visual": "KPI0",
+    "tipo": "card",
+    "titulo": "Productos activos",
+    "x": 24,
+    "y": 116,
+    "ancho": 336,
+    "alto": 116,
+    "campos": {
+      "Values": [
+        [
+          "Movimientos",
+          "Productos activos",
+          true
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": null
+  },
+  {
+    "pagina": "Resumen",
+    "visual": "KPI1",
+    "tipo": "card",
+    "titulo": "Unidades al corte",
+    "x": 376,
+    "y": 116,
+    "ancho": 336,
+    "alto": 116,
+    "campos": {
+      "Values": [
+        [
+          "Movimientos",
+          "Stock actual",
+          true
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": null
+  },
+  {
+    "pagina": "Resumen",
+    "visual": "KPI2",
+    "tipo": "card",
+    "titulo": "Productos bajo mínimo",
+    "x": 728,
+    "y": 116,
+    "ancho": 336,
+    "alto": 116,
+    "campos": {
+      "Values": [
+        [
+          "Movimientos",
+          "Productos stock bajo",
+          true
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": null
+  },
+  {
+    "pagina": "Resumen",
+    "visual": "KPI3",
+    "tipo": "card",
+    "titulo": "Inventario al costo · PEN",
+    "x": 1080,
+    "y": 116,
+    "ancho": 336,
+    "alto": 116,
+    "campos": {
+      "Values": [
+        [
+          "Movimientos",
+          "Valor inventario",
+          true
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": null
+  },
+  {
+    "pagina": "Resumen",
+    "visual": "Mensual",
+    "tipo": "clusteredColumnChart",
+    "titulo": "Entradas y salidas · unidades del periodo",
+    "x": 24,
+    "y": 248,
+    "ancho": 864,
+    "alto": 290,
+    "campos": {
+      "Category": [
+        [
+          "Calendario",
+          "anio_mes",
+          false
+        ]
+      ],
+      "Y": [
+        [
+          "Movimientos",
+          "Total entradas",
+          true
+        ],
+        [
+          "Movimientos",
+          "Total salidas",
+          true
+        ]
+      ]
+    },
+    "orden": [
+      "Calendario",
+      "anio_mes",
+      false,
+      "Ascending"
+    ],
+    "filtro": null
+  },
+  {
+    "pagina": "Resumen",
+    "visual": "Categorias",
+    "tipo": "clusteredBarChart",
+    "titulo": "Movimientos por categoría",
+    "x": 904,
+    "y": 248,
+    "ancho": 512,
+    "alto": 290,
+    "campos": {
+      "Category": [
+        [
+          "Productos",
+          "categoria",
+          false
+        ]
+      ],
+      "Y": [
+        [
+          "Movimientos",
+          "Total entradas",
+          true
+        ],
+        [
+          "Movimientos",
+          "Salidas por categoria",
+          true
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": null
+  },
+  {
+    "pagina": "Resumen",
+    "visual": "BajoStock",
+    "tipo": "tableEx",
+    "titulo": "Productos con stock bajo · saldo al corte",
+    "x": 24,
+    "y": 554,
+    "ancho": 1392,
+    "alto": 322,
+    "campos": {
+      "Values": [
+        [
+          "Productos",
+          "codigo",
+          false
+        ],
+        [
+          "Productos",
+          "producto",
+          false
+        ],
+        [
+          "Productos",
+          "categoria",
+          false
+        ],
+        [
+          "Movimientos",
+          "Stock actual",
+          true
+        ],
+        [
+          "Movimientos",
+          "Stock minimo",
+          true
+        ],
+        [
+          "Movimientos",
+          "Unidades reposicion",
+          true
+        ],
+        [
+          "Movimientos",
+          "Valor inventario",
+          true
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": "Requiere reposicion = 1"
+  },
+  {
+    "pagina": "Abastecimiento",
+    "visual": "KPI0",
+    "tipo": "card",
+    "titulo": "Rotación · veces en periodo",
+    "x": 24,
+    "y": 116,
+    "ancho": 336,
+    "alto": 108,
+    "campos": {
+      "Values": [
+        [
+          "Movimientos",
+          "Rotacion inventario",
+          true
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": null
+  },
+  {
+    "pagina": "Abastecimiento",
+    "visual": "KPI1",
+    "tipo": "card",
+    "titulo": "Costo salidas · PEN",
+    "x": 376,
+    "y": 116,
+    "ancho": 336,
+    "alto": 108,
+    "campos": {
+      "Values": [
+        [
+          "Movimientos",
+          "Costo salidas",
+          true
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": null
+  },
+  {
+    "pagina": "Abastecimiento",
+    "visual": "KPI2",
+    "tipo": "card",
+    "titulo": "Recepciones · PEN",
+    "x": 728,
+    "y": 116,
+    "ancho": 336,
+    "alto": 108,
+    "campos": {
+      "Values": [
+        [
+          "Movimientos",
+          "Importe entradas",
+          true
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": null
+  },
+  {
+    "pagina": "Abastecimiento",
+    "visual": "KPI3",
+    "tipo": "card",
+    "titulo": "Brecha de reposición · unidades",
+    "x": 1080,
+    "y": 116,
+    "ancho": 336,
+    "alto": 108,
+    "campos": {
+      "Values": [
+        [
+          "Movimientos",
+          "Unidades reposicion",
+          true
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": null
+  },
+  {
+    "pagina": "Abastecimiento",
+    "visual": "Ranking",
+    "tipo": "clusteredBarChart",
+    "titulo": "Productos ordenados por salidas",
+    "x": 24,
+    "y": 240,
+    "ancho": 448,
+    "alto": 260,
+    "campos": {
+      "Category": [
+        [
+          "Productos",
+          "producto",
+          false
+        ]
+      ],
+      "Y": [
+        [
+          "Movimientos",
+          "Total salidas",
+          true
+        ]
+      ]
+    },
+    "orden": [
+      "Movimientos",
+      "Total salidas",
+      true,
+      "Descending"
+    ],
+    "filtro": null
+  },
+  {
+    "pagina": "Abastecimiento",
+    "visual": "EntradasProveedor",
+    "tipo": "clusteredBarChart",
+    "titulo": "Entradas por proveedor · unidades",
+    "x": 488,
+    "y": 240,
+    "ancho": 448,
+    "alto": 260,
+    "campos": {
+      "Category": [
+        [
+          "Proveedores",
+          "proveedor",
+          false
+        ]
+      ],
+      "Y": [
+        [
+          "Movimientos",
+          "Total entradas",
+          true
+        ]
+      ]
+    },
+    "orden": [
+      "Movimientos",
+      "Total entradas",
+      true,
+      "Descending"
+    ],
+    "filtro": null
+  },
+  {
+    "pagina": "Abastecimiento",
+    "visual": "Comparacion",
+    "tipo": "clusteredColumnChart",
+    "titulo": "Entradas vs. salidas · unidades",
+    "x": 952,
+    "y": 240,
+    "ancho": 464,
+    "alto": 260,
+    "campos": {
+      "Category": [
+        [
+          "Calendario",
+          "anio_mes",
+          false
+        ]
+      ],
+      "Y": [
+        [
+          "Movimientos",
+          "Total entradas",
+          true
+        ],
+        [
+          "Movimientos",
+          "Total salidas",
+          true
+        ]
+      ]
+    },
+    "orden": [
+      "Calendario",
+      "anio_mes",
+      false,
+      "Ascending"
+    ],
+    "filtro": null
+  },
+  {
+    "pagina": "Abastecimiento",
+    "visual": "Detalle",
+    "tipo": "tableEx",
+    "titulo": "Movimientos del periodo",
+    "x": 24,
+    "y": 516,
+    "ancho": 864,
+    "alto": 360,
+    "campos": {
+      "Values": [
+        [
+          "Movimientos",
+          "movimiento_id",
+          false
+        ],
+        [
+          "Movimientos",
+          "fecha",
+          false
+        ],
+        [
+          "Productos",
+          "producto",
+          false
+        ],
+        [
+          "Movimientos",
+          "tipo",
+          false
+        ],
+        [
+          "Movimientos",
+          "cantidad",
+          false
+        ],
+        [
+          "Movimientos",
+          "costo_unitario",
+          false
+        ]
+      ]
+    },
+    "orden": [
+      "Movimientos",
+      "movimiento_id",
+      false,
+      "Descending"
+    ],
+    "filtro": null
+  },
+  {
+    "pagina": "Abastecimiento",
+    "visual": "Reposicion",
+    "tipo": "tableEx",
+    "titulo": "Reposición al corte",
+    "x": 904,
+    "y": 516,
+    "ancho": 512,
+    "alto": 360,
+    "campos": {
+      "Values": [
+        [
+          "Productos",
+          "producto",
+          false
+        ],
+        [
+          "Movimientos",
+          "Stock actual",
+          true
+        ],
+        [
+          "Movimientos",
+          "Unidades reposicion",
+          true
+        ]
+      ]
+    },
+    "orden": null,
+    "filtro": "Requiere reposicion = 1"
+  }
+]

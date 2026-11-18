@@ -1,0 +1,40 @@
+{
+  "estado": "PASS",
+  "filas": {
+    "categorias": 5,
+    "proveedores": 6,
+    "productos": 40,
+    "movimientos": 4000,
+    "calendario": 365
+  },
+  "stock_inicial": 8840,
+  "entradas": 52263,
+  "salidas": 49610,
+  "stock_final": 11493,
+  "valor_inventario_pen": 186631.0,
+  "productos_stock_bajo": 8,
+  "porcentaje_bajo": 0.2,
+  "rotacion_anual": 4.079823746439755,
+  "saldo_minimo_observado": 13,
+  "escenarios_mensuales_conciliados": 144,
+  "datos_corruptos_rechazados": [
+    "PK duplicada",
+    "FK inválida",
+    "Cantidad cero",
+    "Costo negativo",
+    "Fecha inválida",
+    "Tipo inválido",
+    "Nulo",
+    "Saldo negativo"
+  ],
+  "motor_SQL_ejecutado": "SQLite 3.53.1",
+  "PostgreSQL_ejecutado": false,
+  "DAX_ejecutado": false,
+  "PowerQuery_ejecutado": false,
+  "PowerBI_Desktop_ejecutado": false,
+  "versiones": {
+    "python": "3.12.14",
+    "pandas": "2.2.3",
+    "numpy": "2.3.5"
+  }
+}

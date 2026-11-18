@@ -1,0 +1,20 @@
+model Model
+	culture: es-PE
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		fastCombine
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Productos","Proveedores","Calendario","Movimientos","RutaDatos","fxCSV","Categorias"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Productos
+ref table Proveedores
+ref table Calendario
+ref table Movimientos
+

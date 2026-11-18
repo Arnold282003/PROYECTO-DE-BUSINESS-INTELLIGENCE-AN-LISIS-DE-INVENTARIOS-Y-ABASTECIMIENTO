@@ -1,0 +1,127 @@
+{
+  "estado": "PASS",
+  "archivos": 30,
+  "alcance": "JSON Schema Microsoft; no ejecución de Power BI, M, DAX o TMSL",
+  "resultados": [
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Abastecimiento/page.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Abastecimiento/visuals/Categoria/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Abastecimiento/visuals/Comparacion/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Abastecimiento/visuals/Detalle/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Abastecimiento/visuals/EntradasProveedor/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Abastecimiento/visuals/Fecha/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Abastecimiento/visuals/KPI0/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Abastecimiento/visuals/KPI1/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Abastecimiento/visuals/KPI2/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Abastecimiento/visuals/KPI3/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Abastecimiento/visuals/Proveedor/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Abastecimiento/visuals/Ranking/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Abastecimiento/visuals/Reposicion/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Resumen/page.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Resumen/visuals/BajoStock/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Resumen/visuals/Categoria/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Resumen/visuals/Categorias/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Resumen/visuals/Fecha/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Resumen/visuals/KPI0/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Resumen/visuals/KPI1/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Resumen/visuals/KPI2/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Resumen/visuals/KPI3/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Resumen/visuals/Mensual/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/Resumen/visuals/Proveedor/visual.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/pages/pages.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/report.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition/version.json",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.pbip",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.Report/definition.pbir",
+      "errores": []
+    },
+    {
+      "archivo": "powerbi/Inventario.SemanticModel/definition.pbism",
+      "errores": []
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+relationship abf6c435-095c-5315-addd-aa23c08157b8
+	fromColumn: Productos.proveedor_id
+	toColumn: Proveedores.proveedor_id
+
+relationship 95d401b0-32bb-5c78-845c-4b3b1c2c2db5
+	fromColumn: Movimientos.producto_id
+	toColumn: Productos.producto_id
+
+relationship 69085a85-93b9-5cb1-ad44-1c99c63395ce
+	fromColumn: Movimientos.fecha
+	toColumn: Calendario.fecha
+

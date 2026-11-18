@@ -1,0 +1,175 @@
+table Movimientos
+	lineageTag: 721e0ef6-e6af-4773-b660-0b515a09aa69
+
+	/// Flujo de entradas dentro de fechas seleccionadas.
+	measure 'Total entradas' = COALESCE(CALCULATE(SUM(Movimientos[cantidad]), Movimientos[tipo] = "entrada"), 0)
+		formatString: #,0
+		displayFolder: Inventario
+		lineageTag: 22dbecff-6546-4df5-b579-9d274f59402b
+
+	/// Flujo de salidas dentro del periodo.
+	measure 'Total salidas' = COALESCE(CALCULATE(SUM(Movimientos[cantidad]), Movimientos[tipo] = "salida"), 0)
+		formatString: #,0
+		displayFolder: Inventario
+		lineageTag: 622c7c2e-32a0-4df0-b54f-3166fa39b976
+
+	/// Saldo al fin de la última fecha visible. Ignora inicio del filtro de fechas; apertura anterior a 2025-01-01.
+	measure 'Stock actual' =
+			VAR Corte = MAX(Calendario[fecha])
+			RETURN SUM(Productos[stock_inicial]) + COALESCE(CALCULATE(
+			    SUM(Movimientos[cantidad_neta]),
+			    REMOVEFILTERS(Movimientos[tipo]),
+			    FILTER(ALL(Calendario), Calendario[fecha] <= Corte)
+			), 0)
+		formatString: #,0
+		displayFolder: Inventario
+		lineageTag: 942710c3-98bb-415b-a2fc-e5bf3b9c48f1
+
+	/// Valor a costo fijo por producto; no precio de venta.
+	measure 'Valor inventario' = SUMX(VALUES(Productos[producto_id]), [Stock actual] * CALCULATE(MAX(Productos[costo_unitario])))
+		formatString: "S/ "#,0.00
+		displayFolder: Inventario
+		lineageTag: 92d11bb4-2da2-427b-bb45-c405e11d1495
+
+	/// Catálogo activo filtrado por categoría/proveedor, independiente de movimientos del periodo.
+	measure 'Productos activos' = CALCULATE(COUNTROWS(Productos), Productos[activo] = TRUE())
+		formatString: #,0
+		displayFolder: Inventario
+		lineageTag: 226b08b0-8960-4a8b-b16c-08d29fc23fce
+
+	/// Activos con saldo estrictamente menor al mínimo; incluye saldo cero.
+	measure 'Productos stock bajo' = COALESCE(COUNTROWS(FILTER(FILTER(Productos, Productos[activo] = TRUE()), [Stock actual] < Productos[stock_minimo])), 0)
+		formatString: #,0
+		displayFolder: Inventario
+		lineageTag: e213b6d9-789c-4b13-8abc-ee095f4dd64f
+
+	/// Misma población activa en numerador y denominador.
+	measure 'Porcentaje stock bajo' = DIVIDE([Productos stock bajo], [Productos activos], 0)
+		formatString: 0.0%
+		displayFolder: Inventario
+		lineageTag: 63a68975-7968-4415-bf0d-0670a2224403
+
+	/// Usar Productos[categoria] como eje; no suprime filtros.
+	measure 'Salidas por categoria' = [Total salidas]
+		formatString: #,0
+		displayFolder: Inventario
+		lineageTag: 12f75264-a851-4015-b5a8-6d2df2d164a5
+
+	/// Costo de unidades retiradas durante el periodo.
+	measure 'Costo salidas' = COALESCE(CALCULATE(SUM(Movimientos[importe]), Movimientos[tipo] = "salida"), 0)
+		formatString: "S/ "#,0.00
+		displayFolder: Inventario
+		lineageTag: f1fe0d0a-87dc-492f-90dd-2d3bf2f6b31c
+
+	/// Media de saldos valorizados al cierre de cada día seleccionado; incluye días sin movimientos.
+	measure 'Inventario promedio' = AVERAGEX(VALUES(Calendario[fecha]), [Valor inventario])
+		formatString: "S/ "#,0.00
+		displayFolder: Inventario
+		lineageTag: 3d4dd227-03b9-4450-b8ef-aa23592b6148
+
+	/// Veces en el periodo; sin anualizar. BLANK si denominador cero.
+	measure 'Rotacion inventario' = DIVIDE([Costo salidas], [Inventario promedio])
+		formatString: 0.00" x"
+		displayFolder: Inventario
+		lineageTag: 1303c185-9dfd-42d6-b6a5-dcc6db878d8a
+
+	/// Indicador para filtrar tablas de productos = 1.
+	measure 'Requiere reposicion' = IF(HASONEVALUE(Productos[producto_id]), IF(SELECTEDVALUE(Productos[activo]) = TRUE() && [Stock actual] < SELECTEDVALUE(Productos[stock_minimo]), 1, 0))
+		formatString: 0
+		displayFolder: Inventario
+		lineageTag: 6b0f97d7-8300-49e5-81a7-da807c28d7d7
+
+	/// Brecha hasta mínimo, no punto óptimo de pedido.
+	measure 'Unidades reposicion' = SUMX(FILTER(Productos, Productos[activo] = TRUE()), MAX(0, Productos[stock_minimo] - [Stock actual]))
+		formatString: #,0
+		displayFolder: Inventario
+		lineageTag: ea0ef5c4-4e47-4446-9213-9ad436645c04
+
+	/// Importe de recepciones; compras aproximadas, sin órdenes ni facturas.
+	measure 'Importe entradas' = COALESCE(CALCULATE(SUM(Movimientos[importe]), Movimientos[tipo] = "entrada"), 0)
+		formatString: "S/ "#,0.00
+		displayFolder: Inventario
+		lineageTag: de71e28b-a68f-47c9-9794-b44f519eb918
+
+	/// Ranking dentro de selección, con empates.
+	measure 'Ranking salidas' = RANKX(ALLSELECTED(Productos[producto]), [Total salidas], , DESC, DENSE)
+		formatString: 0
+		displayFolder: Inventario
+		lineageTag: 1906127b-5a8d-45ed-a627-453d9bca004f
+
+	/// Umbral; usar por producto.
+	measure 'Stock minimo' = SUM(Productos[stock_minimo])
+		formatString: #,0
+		displayFolder: Inventario
+		lineageTag: 71cbe6ac-d25a-42ae-8ef3-792fd02a8694
+
+	/// Flujo neto del periodo; no es el stock.
+	measure 'Comparacion neta' = [Total entradas] - [Total salidas]
+		formatString: #,0
+		displayFolder: Inventario
+		lineageTag: e2e11dbc-4af2-4db8-8cca-f56277f9cae9
+
+	column movimiento_id
+		dataType: int64
+		isHidden
+		lineageTag: 688cbb78-fa8d-4724-86dd-5509e23020fe
+		summarizeBy: none
+		sourceColumn: movimiento_id
+
+	column fecha
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: 498db7cc-9d1a-4cdb-8d8f-77dec39a3a8f
+		summarizeBy: none
+		sourceColumn: fecha
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column producto_id
+		dataType: int64
+		isHidden
+		lineageTag: 7042bc66-ced7-4e29-853f-8628157d9106
+		summarizeBy: none
+		sourceColumn: producto_id
+
+	column tipo
+		dataType: string
+		lineageTag: bb0d6575-c53b-4d9f-afc0-c157c7e70c69
+		summarizeBy: none
+		sourceColumn: tipo
+
+	column cantidad
+		dataType: int64
+		lineageTag: 065b5a08-646b-47e4-b68d-12d2aca5cd31
+		summarizeBy: none
+		sourceColumn: cantidad
+
+	column costo_unitario
+		dataType: decimal
+		formatString: "S/ "#,0.00
+		lineageTag: a9b56a2a-c404-4496-b116-3bfb0915a305
+		summarizeBy: none
+		sourceColumn: costo_unitario
+
+	column cantidad_neta
+		dataType: int64
+		lineageTag: b1b7f227-8739-4a57-ad8d-108c669773d5
+		summarizeBy: none
+		sourceColumn: cantidad_neta
+
+	column importe
+		dataType: decimal
+		formatString: "S/ "#,0.00
+		lineageTag: c2c69e06-2afa-42b4-9bb6-9e1fa48dda71
+		summarizeBy: none
+		sourceColumn: importe
+
+	partition Movimientos = m
+		mode: import
+		source =
+				let
+				    Base = fxCSV("movimientos",{{"movimiento_id",Int64.Type},{"fecha",type date},{"producto_id",Int64.Type},{"tipo",type text},{"cantidad",Int64.Type},{"costo_unitario",Currency.Type}}),
+				    Signo = Table.AddColumn(Base,"cantidad_neta",each if [tipo]="entrada" then [cantidad] else if [tipo]="salida" then -[cantidad] else error "Tipo inválido",Int64.Type),
+				    Importe = Table.AddColumn(Signo,"importe",each [cantidad]*[costo_unitario],Currency.Type)
+				in Importe
+

@@ -1,0 +1,72 @@
+// Flujo de entradas dentro de fechas seleccionadas.
+Total entradas =
+COALESCE(CALCULATE(SUM(Movimientos[cantidad]), Movimientos[tipo] = "entrada"), 0)
+
+// Flujo de salidas dentro del periodo.
+Total salidas =
+COALESCE(CALCULATE(SUM(Movimientos[cantidad]), Movimientos[tipo] = "salida"), 0)
+
+// Saldo al fin de la última fecha visible. Ignora inicio del filtro de fechas; apertura anterior a 2025-01-01.
+Stock actual =
+VAR Corte = MAX(Calendario[fecha])
+RETURN SUM(Productos[stock_inicial]) + COALESCE(CALCULATE(
+    SUM(Movimientos[cantidad_neta]),
+    REMOVEFILTERS(Movimientos[tipo]),
+    FILTER(ALL(Calendario), Calendario[fecha] <= Corte)
+), 0)
+
+// Valor a costo fijo por producto; no precio de venta.
+Valor inventario =
+SUMX(VALUES(Productos[producto_id]), [Stock actual] * CALCULATE(MAX(Productos[costo_unitario])))
+
+// Catálogo activo filtrado por categoría/proveedor, independiente de movimientos del periodo.
+Productos activos =
+CALCULATE(COUNTROWS(Productos), Productos[activo] = TRUE())
+
+// Activos con saldo estrictamente menor al mínimo; incluye saldo cero.
+Productos stock bajo =
+COALESCE(COUNTROWS(FILTER(FILTER(Productos, Productos[activo] = TRUE()), [Stock actual] < Productos[stock_minimo])), 0)
+
+// Misma población activa en numerador y denominador.
+Porcentaje stock bajo =
+DIVIDE([Productos stock bajo], [Productos activos], 0)
+
+// Usar Productos[categoria] como eje; no suprime filtros.
+Salidas por categoria =
+[Total salidas]
+
+// Costo de unidades retiradas durante el periodo.
+Costo salidas =
+COALESCE(CALCULATE(SUM(Movimientos[importe]), Movimientos[tipo] = "salida"), 0)
+
+// Media de saldos valorizados al cierre de cada día seleccionado; incluye días sin movimientos.
+Inventario promedio =
+AVERAGEX(VALUES(Calendario[fecha]), [Valor inventario])
+
+// Veces en el periodo; sin anualizar. BLANK si denominador cero.
+Rotacion inventario =
+DIVIDE([Costo salidas], [Inventario promedio])
+
+// Indicador para filtrar tablas de productos = 1.
+Requiere reposicion =
+IF(HASONEVALUE(Productos[producto_id]), IF(SELECTEDVALUE(Productos[activo]) = TRUE() && [Stock actual] < SELECTEDVALUE(Productos[stock_minimo]), 1, 0))
+
+// Brecha hasta mínimo, no punto óptimo de pedido.
+Unidades reposicion =
+SUMX(FILTER(Productos, Productos[activo] = TRUE()), MAX(0, Productos[stock_minimo] - [Stock actual]))
+
+// Importe de recepciones; compras aproximadas, sin órdenes ni facturas.
+Importe entradas =
+COALESCE(CALCULATE(SUM(Movimientos[importe]), Movimientos[tipo] = "entrada"), 0)
+
+// Ranking dentro de selección, con empates.
+Ranking salidas =
+RANKX(ALLSELECTED(Productos[producto]), [Total salidas], , DESC, DENSE)
+
+// Umbral; usar por producto.
+Stock minimo =
+SUM(Productos[stock_minimo])
+
+// Flujo neto del periodo; no es el stock.
+Comparacion neta =
+[Total entradas] - [Total salidas]

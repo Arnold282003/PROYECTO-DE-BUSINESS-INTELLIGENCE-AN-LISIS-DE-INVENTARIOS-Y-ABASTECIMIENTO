@@ -1,0 +1,84 @@
+table Productos
+	lineageTag: a42c3ed5-24aa-40f2-b771-e64a4cfe38af
+
+	column producto_id
+		dataType: int64
+		isHidden
+		lineageTag: be9b86ed-42b7-430e-84a7-bb3d8a416af9
+		summarizeBy: none
+		sourceColumn: producto_id
+
+	column codigo
+		dataType: string
+		lineageTag: 160fa5ff-a2a1-4fe6-9c87-6924df31f0d0
+		summarizeBy: none
+		sourceColumn: codigo
+
+	column producto
+		dataType: string
+		lineageTag: 29b05bbf-9f14-4a38-b566-d49dd50a6086
+		summarizeBy: none
+		sourceColumn: producto
+
+	column categoria_id
+		dataType: int64
+		isHidden
+		lineageTag: 9e03b371-d083-4b28-8dd1-fbc395d9c3f7
+		summarizeBy: none
+		sourceColumn: categoria_id
+
+	column proveedor_id
+		dataType: int64
+		isHidden
+		lineageTag: ac237237-9d66-4ec7-8669-4f9de79cc6e0
+		summarizeBy: none
+		sourceColumn: proveedor_id
+
+	column costo_unitario
+		dataType: decimal
+		formatString: "S/ "#,0.00
+		lineageTag: 3eacbed7-d4a1-4974-8053-d7f642f0cb99
+		summarizeBy: none
+		sourceColumn: costo_unitario
+
+	column precio_referencia
+		dataType: decimal
+		formatString: "S/ "#,0.00
+		lineageTag: 38aa3000-b239-4571-a91d-84f6a47c4a7f
+		summarizeBy: none
+		sourceColumn: precio_referencia
+
+	column stock_minimo
+		dataType: int64
+		lineageTag: 7631d207-a51e-4b47-99f8-66668e59f253
+		summarizeBy: none
+		sourceColumn: stock_minimo
+
+	column stock_inicial
+		dataType: int64
+		isHidden
+		lineageTag: 06c005b7-28ab-4ee4-964c-bb54512d6895
+		summarizeBy: none
+		sourceColumn: stock_inicial
+
+	column activo
+		dataType: boolean
+		lineageTag: 015dfd07-db94-46ec-a7b1-03998fcd4345
+		summarizeBy: none
+		sourceColumn: activo
+
+	column categoria
+		dataType: string
+		lineageTag: 6df95386-e6bf-4242-95ad-358afa054ca7
+		summarizeBy: none
+		sourceColumn: categoria
+
+	partition Productos = m
+		mode: import
+		source =
+				let
+				    Base = fxCSV("productos",{{"producto_id",Int64.Type},{"codigo",type text},{"producto",type text},{"categoria_id",Int64.Type},{"proveedor_id",Int64.Type},{"costo_unitario",Currency.Type},{"precio_referencia",Currency.Type},{"stock_minimo",Int64.Type},{"stock_inicial",Int64.Type},{"activo",type logical}}),
+				    Union = Table.NestedJoin(Base,{"categoria_id"},Categorias,{"categoria_id"},"Cat",JoinKind.LeftOuter),
+				    Resultado = Table.ExpandTableColumn(Union,"Cat",{"categoria"},{"categoria"})
+				in Resultado
+

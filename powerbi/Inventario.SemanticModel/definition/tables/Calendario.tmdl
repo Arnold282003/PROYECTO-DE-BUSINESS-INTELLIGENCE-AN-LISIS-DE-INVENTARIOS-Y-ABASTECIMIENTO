@@ -1,0 +1,43 @@
+table Calendario
+	lineageTag: 44f4e3f0-ad44-4a22-aa12-09f1c02d801a
+	dataCategory: Time
+
+	column fecha
+		dataType: dateTime
+		isKey
+		formatString: dd/MM/yyyy
+		lineageTag: 1effd3d3-7b76-48e0-91e7-9fcda16a5a3d
+		summarizeBy: none
+		sourceColumn: fecha
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column anio
+		dataType: int64
+		lineageTag: 2bdbc04a-13a3-4a3e-b329-fa257b2f554b
+		summarizeBy: none
+		sourceColumn: anio
+
+	column mes
+		dataType: int64
+		lineageTag: 45003e6d-2d23-4acd-8626-e48ae289fae3
+		summarizeBy: none
+		sourceColumn: mes
+
+	column anio_mes
+		dataType: string
+		lineageTag: d6b729f8-dfd7-43ed-ad88-32742477b877
+		summarizeBy: none
+		sourceColumn: anio_mes
+
+	column mes_nombre
+		dataType: string
+		lineageTag: d2e0e9a1-bff0-44b8-b166-e669f3b72ff3
+		summarizeBy: none
+		sourceColumn: mes_nombre
+		sortByColumn: mes
+
+	partition Calendario = m
+		mode: import
+		source = fxCSV("calendario",{{"fecha",type date},{"anio",Int64.Type},{"mes",Int64.Type},{"anio_mes",type text},{"mes_nombre",type text}})
+
